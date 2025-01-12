@@ -18,6 +18,20 @@ public class Modele {
 		executerRequete(requete);
 	}
 	
+	public static void executerRequete(String requete) {
+		try {
+			uneConnexion.seConnecter();
+			
+			Statement unStat = uneConnexion.getMaConnexion().createStatement();
+			unStat.execute(requete);
+			unStat.close();
+			uneConnexion.seDeconnecter();
+		}
+		catch (SQLException exp) {
+			System.out.println ("Erreur d'execution de la requette : "+ requete);
+		}
+	}
+
 	public static void deleteClient (int idclient) {
 		String requete ="delete from client where idclient ="+ idclient +";";
 		executerRequete (requete);

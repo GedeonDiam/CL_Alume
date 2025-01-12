@@ -70,7 +70,7 @@ create table ligne_com(
 );
 
 create table technicien(
-	idtech int(5) not null,
+	idtechnicien int(5) not null,
 	nom varchar(50), 
 	prenom varchar(50), 
 	specialite enum ("telephonie", "Box", "Autre"), 
@@ -79,12 +79,12 @@ create table technicien(
 );
 
 create table intervention(
-	idtech int(5) not null,
+	idtechnicien int(5) not null,
 	codecom int(10) not null, 
 	datehd datetime not null, 
 	datehf datetime ,
 	etat enum("en attente", "terminee", "annulee"),
-	constraint pk_inter primary key (idtech, codecom,datehd),
-	constraint fk_tech foreign key (idtech) references technicien(idtech),
+	constraint pk_inter primary key (idtechnicien, codecom,datehd),
+	constraint fk_tech foreign key (idtechnicien) references technicien(idtechnicien),
 	constraint fk_com_inter foreign key (codecom) references commande(codecom)
 );
