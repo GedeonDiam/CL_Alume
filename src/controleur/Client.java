@@ -1,7 +1,7 @@
 package controleur;
 
 public class Client {
-	private int idclienst;
+	private int idclient;
 
 	
 private String nom, ville, codepostal, rue, numrue, email, tel;
