@@ -29,19 +29,19 @@ create table entreprise (
 );
  
 create table devis (
-	codedevis int(5) not null,
+	iddevis int(5) not null,
 	datedevis date,
 	etatdevis enum("acceptee", "annulee"),
 	idclient int(5) not null,
-	constraint pk_devis primary key (codedevis),
+	constraint pk_devis primary key (iddevis),
 	constraint fk_cli foreign key (idclient) references client(idclient)
 );
 
 create table commande(
-	codecom int(10) not null,
+	idcommande int(10) not null,
 	etatcom enum("en attente", "annulee", "livree", "en preparation", "confirmee"),
 	codedevis int(5) not null,
-	constraint pk_com primary key (codecom),
+	constraint pk_com primary key (idcommande),
 	constraint fk_com foreign key (codedevis) references devis(codedevis)
 );
 
@@ -70,12 +70,13 @@ create table ligne_com(
 );
 
 create table technicien(
-	idtechnicien int(5) not null,
+	idtechnicien int(5) not null auto_increment,
 	nom varchar(50), 
 	prenom varchar(50), 
-	specialite enum ("telephonie", "Box", "Autre"), 
+	specialite enum ("Services", "Ateliers", "Autres"), 
 	email varchar(50) unique, 
-	constraint pk_tech primary key (idtech)
+	mdp varchar (50),
+	constraint pk_tech primary key (idtechnicien)
 );
 
 create table intervention(
