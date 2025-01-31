@@ -42,6 +42,10 @@ private JPanel panelListe = new JPanel ();
 	private JTable uneTable ; 
 	private Tableau unTableau ; 
 	
+	private JPanel panelFiltre = new JPanel();
+	private JTextField txtFiltre = new JTextField();
+	private JButton btFiltrer= new JButton("Filtrer");
+	
 	public PanelTechnicien() {
 		super("Gestion des Techniciens");
 		
@@ -93,7 +97,7 @@ private JPanel panelListe = new JPanel ();
 				//installation de la JTable 
 				
 				String entetes [] = {"ID Technicien","Nom", "Prénom", "Spécialité","Email" };
-				this.unTableau = new Tableau (this.obtenirDonnees(), entetes); 
+				this.unTableau = new Tableau (this.obtenirDonnees(""), entetes); 
 				this.uneTable = new JTable(this.unTableau); 
 				JScrollPane uneScroll = new JScrollPane(this.uneTable); 
 				uneScroll.setBounds(400, 80, 500, 340);
@@ -127,14 +131,29 @@ private JPanel panelListe = new JPanel ();
 						}
 					}
 				});
+				
+				//Installation du panel filtre
+				this.panelFiltre.setBackground(Color.cyan);
+				this.panelFiltre.setBounds(400, 50, 500, 20);
+				this.panelFiltre.setLayout(new GridLayout(1,3));
+				this.panelFiltre.add(new JLabel ("Filtre les clients par :"));
+				this.panelFiltre.add(this.txtFiltre);
+				this.panelFiltre.add(this.btFiltrer);
+				this.btFiltrer.addActionListener(this);
+				this.add(this.panelFiltre);
 
 	}
 	
-	public Object[][] obtenirDonnees (){
+	public Object[][] obtenirDonnees (String filtre){
 		
 		//récuperer les Techniciens de la base de données 
 		
-		ArrayList<Technicien> lesTechniciens = Controleur.selectAllTechnicien(); 
+		ArrayList<Technicien> lesTechniciens; 
+		if (filtre.equals("")) {
+			lesTechniciens = Controleur.selectAllTechnicien();
+		}else {
+			lesTechniciens = Controleur.selectLikeTechnicien(filtre);
+		}
 		
 		//création d'une matrice de données 
 		
@@ -184,7 +203,7 @@ private JPanel panelListe = new JPanel ();
 			
 			//on actualise l'affichage du tableau 
 			
-			this.unTableau.setDonnees(this.obtenirDonnees());
+			this.unTableau.setDonnees(this.obtenirDonnees(""));
 			
 			//on vide les champs
 			this.txtNom.setText("");
@@ -209,7 +228,7 @@ private JPanel panelListe = new JPanel ();
 						
 						//on actualise l'affichage 
 						
-						this.unTableau.setDonnees(this.obtenirDonnees());
+						this.unTableau.setDonnees(this.obtenirDonnees(""));
 						JOptionPane.showMessageDialog(this, "Suppression réussie du technicien.");
 						
 						//on vide les champs 
@@ -242,7 +261,7 @@ private JPanel panelListe = new JPanel ();
 			
 			//on actualise l'affichage du tableau 
 			
-			this.unTableau.setDonnees(this.obtenirDonnees());
+			this.unTableau.setDonnees(this.obtenirDonnees(""));
 			JOptionPane.showMessageDialog(this, "Modification réussie du technicien.");
 			
 			//message de confirmation et on vide les champs 
@@ -253,6 +272,14 @@ private JPanel panelListe = new JPanel ();
 			this.txtMdp.setText("");
 			btSupprimer.setVisible(false);
 			btValider.setText("Valider");
+		}
+		else if (e.getSource() == this.btFiltrer) {
+			//Recuperer le filtre
+			String filtre = this.txtFiltre.getText();
+			//On actualise l'affichage avec les clients trouvés
+			this.unTableau.setDonnees(this.obtenirDonnees(filtre));
+			
+			
 		}
 	}
  
