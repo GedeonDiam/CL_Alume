@@ -2,19 +2,17 @@ package controleur;
 
 public class Commande {
 	private int idcommande;
-	private String codecom, etatcom, codedevis;
+	private String  etatcom, codedevis;
 	
-	public Commande(int idcommande, String codecom, String etatcom, String codedevis) {
+	public Commande(int idcommande, String etatcom, String codedevis) {
 		
 		this.idcommande = idcommande;
-		this.codecom = codecom;
 		this.etatcom = etatcom;
 		this.codedevis = codedevis;	
 	}
-    public Commande( String codecom, String etatcom, String codedevis) {
+    public Commande(  String etatcom, String codedevis) {
 		
 		this.idcommande = 0;
-		this.codecom = codecom;
 		this.etatcom = etatcom;
 		this.codedevis = codedevis;
 	}
@@ -25,14 +23,6 @@ public class Commande {
 
 	public void setIdcommande(int idcommande) {
 		this.idcommande = idcommande;
-	}
-
-	public String getCodecom() {
-		return codecom;
-	}
-
-	public void setCodecom(String codecom) {
-		this.codecom = codecom;
 	}
 
 	public String getEtatcom() {
