@@ -64,7 +64,9 @@ public class VueConnexion extends JFrame implements ActionListener {
 		this.btSeConnecter.addActionListener(this);
 		
 		this.setVisible(true);
+		
     }
+	
 
     @Override
     public void actionPerformed(ActionEvent e) {

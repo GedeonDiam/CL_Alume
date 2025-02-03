@@ -199,7 +199,7 @@ private JPanel panelListe = new JPanel ();
 			Controleur.insertTechnicien(unTechnicien);
 			
 			//on affiche un message d'insertion reussie
-			JOptionPane.showMessageDialog(this, "Insertion réussie du client");
+			JOptionPane.showMessageDialog(this, "Insertion réussie du technicien");
 			
 			//on actualise l'affichage du tableau 
 			
