@@ -322,7 +322,7 @@ public static ArrayList<Technicien> selectLikeTechnicien (String filtre) {
 /**********************Gestion des devis*****************************/
 
 public static void insertDevis (Devis unDevis) {
-	String requete ="insert into devis values (null,'"+unDevis.getEtatdevis() + "','"+unDevis.getDatedevis()+"');";
+	String requete ="insert into devis values (null,'"+unDevis.getDatedevis() + "','"+unDevis.getEtatdevis()+"','"+unDevis.getIdclient() + "');";
 	executerRequete(requete);
 }
 
@@ -349,8 +349,8 @@ public static Devis selectWhereDevis (int iddevis) {
 		if (lesResultats.next()) {
 			//instanciation d'un devis
 			unDevis = new Devis (
-						lesResultats.getInt ("iddevis"), 
-						lesResultats.getString ("etatdevis"), lesResultats.getString("datedevis")
+					lesResultats.getInt ("iddevis"), 
+					lesResultats.getString ("etatdevis"), lesResultats.getString("datedevis"), lesResultats.getInt("idclient")
 						);
 		}
 		unStat.close();
@@ -381,7 +381,7 @@ public static ArrayList<Devis> selectAllDevis () {
 			//instanciation d'un client
 			Devis unDevis = new Devis (
 					lesResultats.getInt ("iddevis"), 
-					lesResultats.getString ("etatdevis"), lesResultats.getString("datedevis")
+					lesResultats.getString ("etatdevis"), lesResultats.getString("datedevis"), lesResultats.getInt("idclient")
 					);
 			//ajout du client dans lesClients
 			lesDevis.add(unDevis);
@@ -415,8 +415,8 @@ public static ArrayList<Devis> selectLikeDevis (String filtre) {
 		while (lesResultats.next()) {
 			//instanciation d'un client
 			Devis unDevis = new Devis (
-							lesResultats.getInt ("iddevis"), 
-							lesResultats.getString ("datedevis"), lesResultats.getString("etatdevis")
+					lesResultats.getInt ("iddevis"), 
+					lesResultats.getString ("etatdevis"), lesResultats.getString("datedevis"), lesResultats.getInt("idclient")
 							);
 			//ajut du client dans lesClients
 			lesDevis.add(unDevis);
@@ -572,7 +572,7 @@ public static void deleteEntreprise (int identreprise) {
 	executerRequete (requete);
 }
 public static void updateEntreprise (Entreprise uneEntreprise) {
-	String requete ="update technicien set nom='"+ uneEntreprise.getStatut()+"', prenom='"+uneEntreprise.getNumsiret() +
+	String requete ="update entreprise set nom='"+ uneEntreprise.getStatut()+"', prenom='"+uneEntreprise.getNumsiret() +
 			"',specialite='"+uneEntreprise.getNomrepresentant()+" where identreprise = " +uneEntreprise.getIdentreprise()+";";
 	executerRequete(requete);
 	
@@ -609,7 +609,7 @@ public static Entreprise selectWhereEntreprise (int identreprise) {
 
 public static ArrayList<Entreprise> selectAllEntreprises () {
 	
-	
+
 	String requete = "select * from entreprise; ";
 	ArrayList<Entreprise> lesEntreprises = new ArrayList<Entreprise>();
 
@@ -621,7 +621,8 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 		// parcours des resultats et extraction des clients
 		
 		while (lesResultats.next()) {
-			//instanciation d'un client
+			//instanciation d'une entreprise 
+			
 			Entreprise uneEntreprise = new Entreprise (
 					lesResultats.getInt ("identreprise"), lesResultats.getString("statut"),
 					lesResultats.getString ("numsiret"), lesResultats.getString("nomrepresentant")
@@ -685,14 +686,14 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 /************************Gestion des Produits*************************/
 	
 	public static void insertProduit (Produit unProduit) {
-		String requete ="insert into client values (null,'"+ unProduit.getNomproduit()+"','"+unProduit.getPrix_unit() + "','"+unProduit.getCodecat()+ "');";
+		String requete ="insert into produit values (null,'"+ unProduit.getNomproduit()+"','"+unProduit.getPrix_unit() + "','"+unProduit.getCodecat()+ "');";
 		executerRequete(requete);
 	}
 	
 	
 
 	public static void deleteProduit (int idproduit) {
-		String requete ="delete from client where idclient ="+ idproduit +";";
+		String requete ="delete from produit where idproduit ="+ idproduit +";";
 		executerRequete (requete);
 	}
 	
@@ -717,7 +718,7 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 				//instanciation d'un produit
 				 unProduit = new Produit (
 						lesResultats.getInt ("idproduit"), lesResultats.getString("nomproduit"),
-						lesResultats.getString ("codecat"), lesResultats.getString("prix_unit")
+						lesResultats.getString ("prix_unit"), lesResultats.getString("codecat")
 						);
 			unStat.close();
 			uneConnexion.seDeconnecter();
@@ -784,7 +785,7 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 				//instanciation d'un client
 				Produit unProduit = new Produit (
 						lesResultats.getInt ("idproduit"), lesResultats.getString("nomproduit"),
-						lesResultats.getString ("codecat"), lesResultats.getString("prix_unit")
+						lesResultats.getString ("prix_unit"), lesResultats.getString("codecat")
 						);
 				//ajut du client dans lesClients
 				lesProduits.add(unProduit);
@@ -799,10 +800,4 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 		return lesProduits;
 			
 		}
-
-
-
-	
-	
-
 }

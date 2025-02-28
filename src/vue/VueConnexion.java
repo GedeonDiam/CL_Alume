@@ -40,21 +40,21 @@ public class VueConnexion extends JFrame implements ActionListener {
 	private JPanel panelForm = new JPanel ();
 	
 	public VueConnexion() {
-	    this.setTitle("Neige et Soliel");
+	    this.setTitle("Alume_2025");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setResizable(false);
-	    this.setBounds(15, 20, 1500, 800);
+	    this.setBounds(15,20,1000,700);
 	    this.getContentPane().setBackground(new Color(255, 255, 255));
 	    this.setLayout(null);
 
 	    ImageIcon uneImage = new ImageIcon("src/Images/footer.png");
 	    JLabel unJLabel = new JLabel(uneImage);
-	    unJLabel.setBounds(0, 580, 1500, 200);
+	    unJLabel.setBounds(0, 500, 1500, 200);
 	    this.add(unJLabel);
 
-	    ImageIcon uneImageLogo = new ImageIcon("src/Images/logo-noir.png");
+	    ImageIcon uneImageLogo = new ImageIcon("src/Images/ampoule.png");
 	    JLabel unJLabelLogo = new JLabel(uneImageLogo);
-	    unJLabelLogo.setBounds(0, 0, 250, 200);
+	    unJLabelLogo.setBounds(50, 50, 450, 200);
 	    this.add(unJLabelLogo);
 
 	    //Pour notre titre

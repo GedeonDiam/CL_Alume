@@ -21,11 +21,11 @@ create table particulier (
 	);
  
 create table entreprise (
-	idclient int(5) not null auto_increment,
+	identreprise int(5) not null auto_increment,
 	statut varchar(50), 
 	numsiret int(14) not null,
 	nomrepresentant varchar(50), 
-	constraint pk_ent primary key (idclient)
+	constraint pk_ent primary key (identreprise)
 );
  
 create table devis (

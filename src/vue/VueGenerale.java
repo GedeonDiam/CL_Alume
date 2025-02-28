@@ -5,8 +5,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -36,12 +38,17 @@ public class VueGenerale extends JFrame implements ActionListener
 	
 	public VueGenerale() {
 		
-		this.setTitle("Application ALUME_2025");
+		this.setTitle("ALUME");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setBounds(100,100,1000,600);
 		this.setLayout(null);
-		this.getContentPane().setBackground(Color.DARK_GRAY);
+		this.getContentPane().setBackground(new Color(255,255,255));
+		
+		 ImageIcon uneImage = new ImageIcon("src/Images/footer.png");
+		    JLabel unJLabel = new JLabel(uneImage);
+		    unJLabel.setBounds(0, 400, 1500, 200);
+		    this.add(unJLabel);
 		
 		//Construction du Panel
 		this.panelMenu.setBackground(Color.darkGray);

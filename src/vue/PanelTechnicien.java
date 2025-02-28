@@ -63,7 +63,7 @@ private JPanel panelListe = new JPanel ();
 		this.txtSpecialite.addItem("Autres");
 		
 		//installation du panel formulaire
-				this.panelForm.setBackground(Color.cyan);
+				this.panelForm.setBackground(new Color(59, 125, 221));
 				this.panelForm.setBounds(40,80,300,220);
 				this.panelForm.setLayout(new GridLayout (7,2));
 				
@@ -100,7 +100,7 @@ private JPanel panelListe = new JPanel ();
 				this.unTableau = new Tableau (this.obtenirDonnees(""), entetes); 
 				this.uneTable = new JTable(this.unTableau); 
 				JScrollPane uneScroll = new JScrollPane(this.uneTable); 
-				uneScroll.setBounds(400, 80, 500, 340);
+				uneScroll.setBounds(400, 80, 500, 220);
 				this.add(uneScroll); 
 				
 				//implementation du click sur une ligne de la table 
@@ -133,7 +133,7 @@ private JPanel panelListe = new JPanel ();
 				});
 				
 				//Installation du panel filtre
-				this.panelFiltre.setBackground(Color.cyan);
+				this.panelFiltre.setBackground(new Color(59, 125, 221));
 				this.panelFiltre.setBounds(400, 50, 500, 20);
 				this.panelFiltre.setLayout(new GridLayout(1,3));
 				this.panelFiltre.add(new JLabel ("Filtre les clients par :"));
