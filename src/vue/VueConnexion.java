@@ -124,8 +124,10 @@ public class VueConnexion extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Veuillez vérifier vos identifiants !",
                         "Erreur de Connexion", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Bienvenue  " + unTechnicien.getNom()+" " + "  " + unTechnicien.getPrenom(),
+                JOptionPane.showMessageDialog(this, "Bienvenue  " + unTechnicien.getNom()+ "  " + unTechnicien.getPrenom(),
                         "Connexion à Orange Application", JOptionPane.INFORMATION_MESSAGE);
+                
+                Alume.setTechConnecte(unTechnicien);
 
                 Alume.rendreVisible(false); // Fermeture de la connexion
                 Alume.creerVueGenerale(true); // Ouverture du logiciel

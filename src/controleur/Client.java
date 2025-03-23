@@ -4,9 +4,9 @@ public class Client {
 	private int idclient;
 
 	
-private String nom, ville, codepostal, rue, numrue, email, tel;
+private String nom, ville, codepostal, rue, numrue, email, tel, mdp;
 	
-	public Client(int idClient, String nom, String ville, String codepostal, String rue, String numrue, String email,String tel) {
+	public Client(int idClient, String nom, String ville, String codepostal, String rue, String numrue, String email,String tel, String mdp) {
 		
 		this.idclient = idClient;
 		this.nom = nom;
@@ -16,10 +16,11 @@ private String nom, ville, codepostal, rue, numrue, email, tel;
 		this.numrue = numrue;
 		this.email = email;
 		this.tel = tel;
+		this.mdp= mdp;
 	}
 
 	public Client( String nom,String ville, String codepostal, String rue, String numrue, String email,
-			String tel) {
+			String tel, String mdp) {
 		
 		this.idclient = 0;
 		this.nom = nom;
@@ -29,6 +30,7 @@ private String nom, ville, codepostal, rue, numrue, email, tel;
 		this.numrue = numrue;
 		this.email = email;
 		this.tel = tel;
+		this.mdp = mdp;
 	}
 
 	public int getIdclient() {
@@ -93,6 +95,14 @@ private String nom, ville, codepostal, rue, numrue, email, tel;
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	
+	public String getMdp() {
+		return mdp;
+	}
+	
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
 	}
 	
 	

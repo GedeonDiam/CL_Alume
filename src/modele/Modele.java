@@ -18,14 +18,13 @@ public class Modele {
 	/************************Gestion des clients*************************/
 	
 	public static void insertClient (Client unClient) {
-		String requete ="insert into client values (null,'"+ unClient.getNom()+"','"+unClient.getVille() + "','"+unClient.getCodepostal()+ "','" +unClient.getRue()+ "','"+unClient.getNumrue()+ "','" + unClient.getEmail()+ "','"+ unClient.getTel()+"');";
+		String requete ="insert into client values (null,'"+ unClient.getNom()+"','"+unClient.getVille() + "','"+unClient.getCodepostal()+ "','" +unClient.getRue()+ "','"+unClient.getNumrue()+ "','" + unClient.getEmail()+ "','"+ unClient.getTel()+  "','"+unClient.getMdp()+"');";
 		executerRequete(requete);
 	}
 	
 	public static void executerRequete(String requete) {
 		try {
 			uneConnexion.seConnecter();
-			
 			Statement unStat = uneConnexion.getMaConnexion().createStatement();
 			unStat.execute(requete);
 			unStat.close();
@@ -43,7 +42,7 @@ public class Modele {
 	
 	public static void updateClient (Client unClient) {
 		String requete ="update client set nom = '" + unClient.getNom()
-		+"', ville = '" + unClient.getVille() + "', rue = '" + unClient.getRue() 
+		+"', ville = '" + unClient.getVille() + "', rue = '" + unClient.getRue()  + "', mdp = '" + unClient.getMdp()
 		+ "',  email = '" + unClient.getEmail() + "', tel = '" + unClient.getTel() + "', numrue = '" + unClient.getNumrue()
 		+ "' where idclient = " +unClient.getIdclient()+";";
 		executerRequete (requete); 
@@ -65,7 +64,8 @@ public class Modele {
 						lesResultats.getInt ("idclient"), lesResultats.getString("nom"),
 						lesResultats.getString ("ville"), lesResultats.getString("codepostal"),
 						lesResultats.getString ("rue"), lesResultats.getString("numrue"),
-						lesResultats.getString("email"), lesResultats.getString("tel")
+						lesResultats.getString("email"), lesResultats.getString("tel"),
+						lesResultats.getString("mdp")
 							);
 			}
 			unStat.close();
@@ -98,7 +98,8 @@ public class Modele {
 						lesResultats.getInt ("idclient"), lesResultats.getString("nom"),
 						lesResultats.getString ("ville"), lesResultats.getString("codepostal"),
 						lesResultats.getString ("rue"), lesResultats.getString("numrue"),
-						lesResultats.getString("email"), lesResultats.getString("tel")
+						lesResultats.getString("email"), lesResultats.getString("tel"),
+						lesResultats.getString("mdp")
 						);
 				//ajout du client dans lesClients
 				lesClients.add(unClient);
@@ -124,7 +125,8 @@ public class Modele {
 				+ "rue like '%"+ filtre+"%' or  "
 				+ "numrue like '%"+ filtre+"%' or  "
 				+ "email like '%"+ filtre+"%' or  "
-				 + "tel like '%"+ filtre+"%';";
+				 + "tel like '%"+ filtre+"% ' or "
+				 + "mdp like '%"+ filtre+"%';";
 		ArrayList<Client> lesClients = new ArrayList<Client>();
 		
 		try {
@@ -140,7 +142,8 @@ public class Modele {
 						lesResultats.getInt ("idclient"), lesResultats.getString("nom"),
 						lesResultats.getString ("ville"), lesResultats.getString("codepostal"),
 						lesResultats.getString ("rue"), lesResultats.getString("numrue"),
-						lesResultats.getString("email"), lesResultats.getString("tel")
+						lesResultats.getString("email"), lesResultats.getString("tel"),
+						lesResultats.getString("tel")
 						);
 				//ajut du client dans lesClients
 				lesClients.add(unClient);
@@ -283,9 +286,9 @@ public static ArrayList<Technicien> selectLikeTechnicien (String filtre) {
 	
 	
 	String requete = "select * from technicien where nom like '%"+filtre+"%' or  "
-			+ "prenom like '%"+ filtre+"%' or  "
-			+ "adresse like '%"+ filtre+"%' or  "
-			 + "specialite like '%"+ filtre+"%'; ";
+			+ "prenom like '%"+ filtre+ "%' or  "
+			+ "email like '%"+ filtre+ "%' or  "
+			 + "specialite like '%"+ filtre+ "%'; ";
 	
 	ArrayList<Technicien> lesTechniciens = new ArrayList<Technicien>();
 	
@@ -327,13 +330,18 @@ public static void insertDevis (Devis unDevis) {
 }
 
 public static void deleteDevis (int iddevis) {
-	String requete ="delete from devis where idclient ="+ iddevis +";";
+	String requete ="delete from devis where iddevis ="+ iddevis +";";
 	executerRequete (requete);
 }
 
 public static void updateDevis (Devis unDevis) {
-	String requete ="update devis set datedevis = '" + unDevis.getDatedevis() + "', etatcom = '" + unDevis.getEtatdevis()+";";
-	executerRequete (requete); 
+	String requete = "UPDATE devis SET datedevis = '" + unDevis.getDatedevis() + 
+            "', etatdevis = '" + unDevis.getEtatdevis() + 
+            "', idclient = " + unDevis.getIdclient() +  
+            " WHERE iddevis = " + unDevis.getIddevis() + ";";
+
+executerRequete(requete);
+
 }
 
 public static Devis selectWhereDevis (int iddevis) {
@@ -686,7 +694,11 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 /************************Gestion des Produits*************************/
 	
 	public static void insertProduit (Produit unProduit) {
-		String requete ="insert into produit values (null,'"+ unProduit.getNomproduit()+"','"+unProduit.getPrix_unit() + "','"+unProduit.getCodecat()+ "');";
+		String requete = "INSERT INTO produit (nomproduit, prix_unit, codecat) VALUES ('"
+                + unProduit.getNomproduit() + "', '"
+                + unProduit.getPrix_unit() + "', '"
+                + unProduit.getCodecat() + "');";
+
 		executerRequete(requete);
 	}
 	
@@ -697,12 +709,15 @@ public static ArrayList<Entreprise> selectAllEntreprises () {
 		executerRequete (requete);
 	}
 	
-	public static void updateProduit (Produit unProduit) {
-		String requete ="update produit set nomprodtuit = '" + unProduit.getNomproduit()
-		+"', prix_unit = '" + unProduit.getPrix_unit() + "', codecat = '" + unProduit.getCodecat() 
-		+ ";";
-		executerRequete (requete); 
+	public static void updateProduit(Produit unProduit) {
+	    String requete = "UPDATE produit SET nomproduit = '" + unProduit.getNomproduit()
+	                     + "', prix_unit = '" + unProduit.getPrix_unit()
+	                     + "', codecat = '" + unProduit.getCodecat() 
+	                     + "' WHERE idproduit = " + unProduit.getIdproduit() + ";";
+	                     
+	    executerRequete(requete); 
 	}
+
 	
 	public static Produit selectWhereProduit (int idproduit) {
 		String requete = "select * from produit where idproduit =" + idproduit +";";

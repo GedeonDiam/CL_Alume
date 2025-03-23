@@ -105,16 +105,19 @@ public class PanelProduit extends PanelPrincipal implements ActionListener
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int numLigne = 0 ; 
-				if (e.getClickCount() >= 1) {
-					numLigne = uneTable.getSelectedRow(); 
-					txtNomproduit.setText(unTableau.getValueAt(numLigne, 1).toString());
-					txtPrix_unit.setText(unTableau.getValueAt(numLigne,2).toString());
-					txtCode_cat.setText(unTableau.getValueAt(numLigne, 4).toString());
-					btSupprimer.setVisible(true);
-					btValider.setText("Modifier");
-				}
+			    int numLigne = 0; 
+			    if (e.getClickCount() >= 1) {
+			        numLigne = uneTable.getSelectedRow(); 
+			        
+			        txtNomproduit.setText(unTableau.getValueAt(numLigne, 1).toString());
+			        txtPrix_unit.setText(unTableau.getValueAt(numLigne, 2).toString());
+			        txtCode_cat.setText(unTableau.getValueAt(numLigne, 3).toString());  // Correction ici
+			        
+			        btSupprimer.setVisible(true);
+			        btValider.setText("Modifier");
+			    }
 			}
+
 		});
 	}
 public Object[][] obtenirDonnees (String filtre){
@@ -193,7 +196,7 @@ else if (e.getSource() == this.btSupprimer) {
 			if (retour ==0) {
 						//on supprime de la base de données 
 				
-						Controleur.deleteTechnicien(idproduit);
+						Controleur.deleteProduit(idproduit);
 						
 						//on actualise l'affichage 
 						

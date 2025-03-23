@@ -2,34 +2,22 @@ drop database if exists ALUME;
 create database ALUME;
 use ALUME;
 
-create table client (
-	idclient int (5) not null auto_increment, 
-	nom varchar(50), 
-	ville varchar(100),
-	codepostal char(5),
-	rue varchar(50),
-	numrue int(3), 
-	email varchar(50)unique, 
-	tel varchar(20), 
-	constraint pk_cli primary key (idclient)
+CREATE TABLE client (
+    idclient INT(5) NOT NULL AUTO_INCREMENT, 
+    nom VARCHAR(50), 
+    ville VARCHAR(100),
+    codepostal CHAR(5),
+    rue VARCHAR(50),
+    numrue INT(3), 
+    email VARCHAR(50) UNIQUE, 
+    tel VARCHAR(20), 
+    mdp VARCHAR(255) NOT NULL, 
+    CONSTRAINT pk_cli PRIMARY KEY (idclient)
 );
- 
-create table particulier (
-	idclient int (5) not null auto_increment,
-	prenom varchar(50),   
-	constraint pk_p primary key (idclient)
-	);
- 
-create table entreprise (
-	identreprise int(5) not null auto_increment,
-	statut varchar(50), 
-	numsiret int(14) not null,
-	nomrepresentant varchar(50), 
-	constraint pk_ent primary key (identreprise)
-);
+
  
 create table devis (
-	iddevis int(5) not null,
+	iddevis int(5) not null AUTO_INCREMENT,
 	datedevis date,
 	etatdevis enum("acceptee", "annulee"),
 	idclient int(5) not null,
@@ -38,7 +26,7 @@ create table devis (
 );
 
 create table commande(
-	idcommande int(10) not null,
+	idcommande int(10) not null AUTO_INCREMENT,
 	etatcom enum("en attente", "annulee", "livree", "en preparation", "confirmee"),
 	codedevis int(5) not null,
 	constraint pk_com primary key (idcommande),
@@ -52,7 +40,7 @@ create table cat_produit(
 );
 
 create table produit(
-	idproduit int(6) not null,
+	idproduit int(6) not null AUTO_INCREMENT,
 	nomproduit varchar(50),
 	prix_unit decimal(8,2),
 	codecat int(4) not null,

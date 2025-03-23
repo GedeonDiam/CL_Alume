@@ -18,20 +18,20 @@ import controleur.Alume;
 
 public class VueGenerale extends JFrame implements ActionListener
 {
+	private JButton btProfil = new JButton("Profil");
 	private JButton btClients = new JButton("Clients");
 	private JButton btCommande = new JButton("Commande");
 	private JButton btDevis = new JButton("Devis");
-	private JButton btEntreprise = new JButton("Entreprise");
 	private JButton btProduit = new JButton("Produit");
 	private JButton btTechnicien = new JButton("Technicien");
 	private JButton btQuitter = new JButton("Quitter");
 
 	private JPanel panelMenu = new JPanel ();
 	
+	private static PanelProfil unPanelProfil = new PanelProfil();
 	private static PanelClients unPanelClients = new PanelClients();
 	private static PanelCommande unPanelCommande = new PanelCommande();
 	private static PanelDevis unPanelDevis = new PanelDevis();
-	private static PanelEntreprise unPanelEntreprise = new PanelEntreprise();
 	private static PanelProduit unPanelProduit = new PanelProduit();
 	private static PanelTechnicien unPanelTechnicien = new PanelTechnicien();
 	
@@ -54,10 +54,10 @@ public class VueGenerale extends JFrame implements ActionListener
 		this.panelMenu.setBackground(Color.darkGray);
 		this.panelMenu.setBounds(50,10,900,40);
 		this.panelMenu.setLayout(new GridLayout(1,6));
+		this.panelMenu.add(this.btProfil);
 		this.panelMenu.add(this.btClients);
 		this.panelMenu.add(this.btTechnicien);
 		this.panelMenu.add(this.btCommande);
-		this.panelMenu.add(this.btEntreprise);
 		this.panelMenu.add(this.btDevis);
 		this.panelMenu.add(this.btProduit);
 
@@ -67,34 +67,37 @@ public class VueGenerale extends JFrame implements ActionListener
 		
 		//rendre les boutons ecoutables
 		
+				this.btProfil.addActionListener(this);
 				this.btClients.addActionListener(this);
 				this.btTechnicien.addActionListener(this);
 				this.btCommande.addActionListener(this);
-				this.btEntreprise.addActionListener(this);
 				this.btDevis.addActionListener(this);
 				this.btProduit.addActionListener(this);
+
 
 				this.btQuitter.addActionListener(this);
 				
 				//Ajout des panels a la fenetre
-				
+				this.add(this.unPanelProfil);
 				this.add(this.unPanelClients);
 				this.add(this.unPanelCommande);
 				this.add(this.unPanelTechnicien);
-				this.add(this.unPanelEntreprise);
 				this.add(this.unPanelDevis);
 				this.add(this.unPanelProduit);
-
+				
 
 				this.setVisible(true);
 		
 	}
 	
+	
+
 	public void afficherPanel (int choix) {
+		
+		this.unPanelProfil.setVisible(false);
 		this.unPanelClients.setVisible(false);
 		this.unPanelTechnicien.setVisible(false);
 		this.unPanelCommande.setVisible(false);
-		this.unPanelEntreprise.setVisible(false);
 		this.unPanelDevis.setVisible(false);
 		this.unPanelProduit.setVisible(false);
 
@@ -103,9 +106,10 @@ public class VueGenerale extends JFrame implements ActionListener
 		case 1: this.unPanelClients.setVisible(true);break;
 		case 2: this.unPanelTechnicien.setVisible(true);break;
 		case 3: this.unPanelCommande.setVisible(true);break;
-		case 4: this.unPanelEntreprise.setVisible(true);break;
-		case 5: this.unPanelDevis.setVisible(true);break;
-		case 6: this.unPanelProduit.setVisible(true);break;
+		case 4: this.unPanelDevis.setVisible(true);break;
+		case 5: this.unPanelProduit.setVisible(true);break;
+		case 6: this.unPanelProfil.setVisible(true);break;
+
 
 		}
 	}
@@ -121,6 +125,10 @@ public class VueGenerale extends JFrame implements ActionListener
 			Alume.rendreVisible(true);//Ouverture de la connexion
 			Alume.creerVueGenerale(false); //Fermeture du logiciel
 		}
+			else if (e.getSource() == this.btProfil) {
+			    this.afficherPanel(6); // Affiche le panel Profil
+			}
+
 		
 		
 		}else if (e.getSource()==this.btClients) {
@@ -132,14 +140,12 @@ public class VueGenerale extends JFrame implements ActionListener
 		else if (e.getSource()==this.btCommande) {
 			this.afficherPanel(3);
 		}
-		else if (e.getSource()==this.btEntreprise) {
+		
+		else if (e.getSource()==this.btDevis) {
 			this.afficherPanel(4);
 		}
-		else if (e.getSource()==this.btDevis) {
-			this.afficherPanel(5);
-		}
 		else if (e.getSource()==this.btProduit) {
-			this.afficherPanel(6);
+			this.afficherPanel(5);
 		}
 	}
 }

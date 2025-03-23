@@ -32,6 +32,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 	private JTextField txtNumrue = new JTextField();
 	private JTextField txtEmail = new JTextField();
 	private JTextField txtTel = new JTextField();
+	private JTextField txtMdp = new JTextField();
+
 	
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btValider = new JButton("Valider");
@@ -61,7 +63,7 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 		//installation du panel formulaire
 		this.panelForm.setBackground(new Color(59, 125, 221));
 		this.panelForm.setBounds(40,80,300,220);
-		this.panelForm.setLayout(new GridLayout (8,2));
+		this.panelForm.setLayout(new GridLayout (9,2));
 		
 		this.panelForm.add(new JLabel("Nom Client"));
 		this.panelForm.add(this.txtNom);
@@ -83,6 +85,9 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 		
 		this.panelForm.add(new JLabel("Numero de la rue"));
 		this.panelForm.add(this.txtNumrue);
+		
+		this.panelForm.add(new JLabel("Mot de passe"));
+		this.panelForm.add(this.txtMdp);
 		
 		this.panelForm.add(this.btAnnuler);
 		this.panelForm.add(this.btValider);
@@ -147,6 +152,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 						txtNumrue.setText(unTableau.getValueAt(numLigne,5).toString());
 						txtEmail.setText(unTableau.getValueAt(numLigne,6).toString());
 						txtTel.setText(unTableau.getValueAt(numLigne,7).toString());
+						txtMdp.setText(unTableau.getValueAt(numLigne,8).toString());
+
 						
 						btSupprimer.setVisible(true);
 						btValider.setText("Modifier");
@@ -181,7 +188,7 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			lesClients = Controleur.selectLikeClients(filtre);
 		}
 		//création d'une matrice de données
-		Object[][] matrice = new Object [lesClients.size()][8];
+		Object[][] matrice = new Object [lesClients.size()][9];
 		int i=0;
 		for (Client unClient : lesClients) {
 			matrice[i][0]= unClient.getIdclient();
@@ -192,6 +199,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			matrice[i][5]= unClient.getNumrue();
 			matrice[i][6]= unClient.getEmail();
 			matrice[i][7]= unClient.getTel();
+			matrice[i][8]= unClient.getMdp();
+
 			i++;
 			
 		}
@@ -208,6 +217,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			this.txtNumrue.setText("");
 			this.txtEmail.setText("");
 			this.txtTel.setText("");
+			this.txtMdp.setText("");
+
 			btSupprimer.setVisible(false);
 			btValider.setText("Valider");
 			
@@ -220,9 +231,11 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			String numrue= this.txtNumrue.getText();
 			String email= this.txtEmail.getText();
 			String tel= this.txtTel.getText();
+			String mdp= this.txtMdp.getText();
+
 			
 			//instancier la classe client
-			Client unClient = new Client(nom, ville, codepostale,  rue, numrue, email, tel);
+			Client unClient = new Client(nom, ville, codepostale,  rue, numrue, email, tel, mdp);
 			
 			//inserer le client dans la bdd
 			Controleur.insertClient(unClient);
@@ -243,6 +256,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			this.txtNumrue.setText("");
 			this.txtEmail.setText("");
 			this.txtTel.setText("");
+			this.txtMdp.setText("");
+
 			btSupprimer.setVisible(false);
 			btValider.setText("Valider");
 
@@ -271,6 +286,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			this.txtNumrue.setText("");
 			this.txtEmail.setText("");
 			this.txtTel.setText("");
+			this.txtMdp.setText("");
+
 			btSupprimer.setVisible(false);
 			btValider.setText("Valider");
 		}
@@ -289,10 +306,12 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			String numrue= this.txtNumrue.getText();
 			String email= this.txtEmail.getText();
 			String tel= this.txtTel.getText();
+			String mdp= this.txtMdp.getText();
+
 			
 			//on modifie dans la base de donnees
 			
-			Client unClient = new Client(idclient, nom, ville, codepostale,  rue, numrue, email, tel);
+			Client unClient = new Client(idclient, nom, ville, codepostale,  rue, numrue, email, tel, mdp);
 			Controleur.updateClient(unClient);
 			
 			//on actualise l'affichage du tableau
@@ -308,6 +327,8 @@ public class PanelClients extends PanelPrincipal implements ActionListener
 			this.txtNumrue.setText("");
 			this.txtEmail.setText("");
 			this.txtTel.setText("");
+			this.txtMdp.setText("");
+
 			btSupprimer.setVisible(false);
 			btValider.setText("Valider");
 		}

@@ -214,7 +214,7 @@ public class PanelDevis extends PanelPrincipal implements ActionListener
 			if (retour ==0) {
 						//on supprime de la base de données 
 				
-						Controleur.deleteTechnicien(iddevis);
+						Controleur.deleteDevis(iddevis);
 						
 						//on actualise l'affichage 
 						
